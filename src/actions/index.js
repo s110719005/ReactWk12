@@ -252,14 +252,14 @@ export const addOrdertoFirebase = async (dispatch, cart) => {
 // FAIL_USERORDER_REQUEST,
 // SET_USERORDER_CONTENT,
 // SET_SEARCHED_DETAIL
-export const setUserOrder = async (dispatch, url) => {
-  let orders = [];
+export const setUserOrder = async (dispatch) => {
+  let order = [];
   dispatch({ type: BEGIN_USERORDER_REQUEST });
   try {
-    orders = await getUserOrder(url);
+    order = await getUserOrder();
     dispatch({
       type: SET_USERORDER_CONTENT,
-      payload: { orders },
+      payload: { order },
     });
     dispatch({ type: SUCCESS_USERORDER_REQUEST });
   } catch (error) {

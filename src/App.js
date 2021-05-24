@@ -12,6 +12,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Order from './pages/Order'
 
 import { StoreProvider } from "./store";
+import SearchedOrder from './pages/SearchedOrder';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrder} />
           <Route path="/order" component={Order} />
           <Route path="/profile" component={Profile} />
+          <Route path="/searched-order/:searchedOrderId" component={SearchedOrder} />
         </Switch>
       </BrowserRouter>
     </StoreProvider>

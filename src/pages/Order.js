@@ -7,17 +7,16 @@ import { StoreContext } from "../store"
 const { Header, Content, Footer } = Layout;
 
 function Order() {
-   const { state: { orderInfo } } = useContext(StoreContext);
-   const id = !orderInfo.loading? orderInfo.order.id : "";
+   //const { state: { orderInfo } } = useContext(StoreContext);
+   const { state: { searchedDetail: { order }, requestUserOrder: { loading } }, dispatch } = useContext(StoreContext);
+   //const id = !orderInfo.loading? orderInfo.order.id : "";
 
    return (
     <Layout className="container main-layout">
       <Layout className="bg-gray main-area">
-        <Header className="layout-header">
-          <OrderHeader title={`Order: ${id}`} />
-        </Header>
+        
         <Content className="layout-content">
-           <OrderCard order={orderInfo} />
+           <OrderCard order={order} />
         </Content>
         <Footer className="layout-footer">
           <AppFooter />

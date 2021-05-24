@@ -6,9 +6,10 @@ import { savePaymentMethod } from "../actions"
 import { StoreContext } from "../store";
 import { setPage } from "../actions"
 
-export default function OrderCard() {
-   const { state: { cart, orderInfo: { loading } }, dispatch } = useContext(StoreContext);
-   const { cartItems } = cart;
+export default function SearchedDetail() {
+   //const { state: { cart, orderInfo: { loading } }, dispatch } = useContext(StoreContext);
+   const { state: { searchedDetail: { order }, requestUserOrder: { loading } }, dispatch } = useContext(StoreContext);
+   //const { cartItems } = order.orderItems;
    const history = useHistory()
    const antIcon = <LoadingOutlined style={{ fontSize: 80, color: "#8183ff" }} spin />;
 
@@ -23,19 +24,19 @@ export default function OrderCard() {
       history.push("/");
     };
 
-   const getTotalPrice = () => {
-      return (cartItems.length > 0) ?
-         cartItems.reduce((sum, item) => sum + item.price * item.qty, 0)
-         : 0;
-   }
+   // const getTotalPrice = () => {
+   //    return (cartItems.length > 0) ?
+   //       cartItems.reduce((sum, item) => sum + item.price * item.qty, 0)
+   //       : 0;
+   // }
 
    const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-   cart.itemsPrice = toPrice(
-      cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-   );
-   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+   // order.itemsPrice = toPrice(
+   //    order.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+   // );
+   order.shippingPrice = order.itemsPrice > 100 ? toPrice(0) : toPrice(10);
+   order.taxPrice = toPrice(0.15 * order.itemsPrice);
+   order.totalPrice = order.itemsPrice + order.shippingPrice + order.taxPrice;
 
 
    return (
@@ -54,21 +55,21 @@ export default function OrderCard() {
                      <div className="card card-body">
                         <h2 style={{ color: 'white' }}>Shipping</h2>
                         <p>
-                           <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                           <strong>Address: </strong> {cart.shippingAddress.address},
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
+                           <strong>Name:</strong> {order.shippingAddress.fullName} <br />
+                           <strong>Address: </strong> {order.shippingAddress.address},
+                  {order.shippingAddress.city}, {order.shippingAddress.postalCode}
+                  ,{order.shippingAddress.country}
                         </p>
                      </div>
                      <div className="card card-body">
                         <h2 style={{ color: 'white' }}>Payment</h2>
                         <p>
-                           <strong>Method:</strong> {cart.paymentMethod}
+                           <strong>Method:</strong> {order.paymentMethod}
                         </p>
                      </div>
                      <div className="card card-body">
                         <h2 style={{ color: 'white' }}>Order Items</h2>
-                        {cartItems.length === 0 ? (
+                        {/* {cartItems.length === 0 ? (
                            <div>Cart is empty</div>
                         ) : (
                            cartItems.map(item => (
@@ -90,10 +91,10 @@ export default function OrderCard() {
 
                               </li>
                            ))
-                        )}
+                        )} */}
                         <div className="cart-total-price-wrap">
                            Total
-            <div className="cart-total-price">${getTotalPrice()}</div>
+            {/* <div className="cart-total-price">${getTotalPrice()}</div> */}
                         </div>
                      </div>
 
@@ -106,22 +107,22 @@ export default function OrderCard() {
                         <h2 style={{ color: 'white' }}>Order Summary</h2>
                         <div className="row">
                            <div>Items</div>
-                           <div>${cart.itemsPrice}</div>
+                           <div>${order.itemsPrice}</div>
                         </div>
                         <div className="row">
                            <div>Shipping</div>
-                           <div>${cart.shippingPrice}</div>
+                           <div>${order.shippingPrice}</div>
                         </div>
                         <div className="row">
                            <div>Tax</div>
-                           <div>${cart.taxPrice}</div>
+                           <div>${order.taxPrice}</div>
                         </div>
                         <div className="row">
                            <div>
                               <strong> Order Total</strong>
                            </div>
                            <div>
-                              <strong>${cart.totalPrice}</strong>
+                              <strong>${order.totalPrice}</strong>
                            </div>
                         </div>
                         <Button

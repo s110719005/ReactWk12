@@ -104,17 +104,18 @@ export const signOut = () => {
 }
 
 //wk12
-export const getUserOrder = async (url) => {
+export const getUserOrder = async () => {
   
   const user = auth.currentUser.uid;
-  let jsonProducts = [];
+  let jsonOrders = [];
   // QUERY PRODUCTS
   let querySnapshot;
   querySnapshot = await allOrdersCollectionRef.where("user","==",user).get();
+  //querySnapshot = await allOrdersCollectionRef.get();
   querySnapshot.forEach((doc) => {
-    jsonProducts.push(doc.data());
+    jsonOrders.push(doc.data());
   });
-  return jsonProducts;
+  return jsonOrders;
   
 }
 
