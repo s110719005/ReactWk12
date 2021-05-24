@@ -20,8 +20,8 @@ export default function SearchedDetail() {
    };
 
    const onClickHeader = () => {
-      setPage(dispatch, "/",  "NORDIC NEST Shopping Cart");
-      history.push("/");
+      //setPage(dispatch, "/profile");
+      history.push("/profile");
     };
 
    // const getTotalPrice = () => {
@@ -69,10 +69,8 @@ export default function SearchedDetail() {
                      </div>
                      <div className="card card-body">
                         <h2 style={{ color: 'white' }}>Order Items</h2>
-                        {/* {cartItems.length === 0 ? (
-                           <div>Cart is empty</div>
-                        ) : (
-                           cartItems.map(item => (
+                        {
+                           order.orderItems.map(item => (
                               <li key={item.id} className="cart-item">
                                  <div className="cart-image">
                                     <img src={item.image} alt={item.name} />
@@ -91,7 +89,7 @@ export default function SearchedDetail() {
 
                               </li>
                            ))
-                        )} */}
+                        }
                         <div className="cart-total-price-wrap">
                            Total
             {/* <div className="cart-total-price">${getTotalPrice()}</div> */}
@@ -125,26 +123,20 @@ export default function SearchedDetail() {
                               <strong>${order.totalPrice}</strong>
                            </div>
                         </div>
-                        <Button
-                           className="primary-google-btn"
-                           block
-                           type="primary"
-                           onClick={placeOrderHandler}
-                        >
-                           Google Pay
-                        </Button>
-                        <div>
+                       
+                        
+                     </div>
+                     <div>
                            -------------
                         </div>
                         <div
                            onClick={onClickHeader}
                         >
-                           Go back to Home
+                           Go back to Profile
                         </div>
                         <div>
                            -------------
                         </div>
-                     </div>
 
                   </Col>
                </Row>
